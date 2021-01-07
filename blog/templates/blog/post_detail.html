@@ -1,15 +1,33 @@
 {% extends 'blog/base.html' %}
-{% load static %}
 
-<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
 {% block content %}
+<style type="text/css">
+ h2{
+   color: #C25100;
+ }
+ button {
+   position: absolute;
+   top: 10%;
+   right: 0px;
+ }
+ button > a {
+   color: white;
+ }
+ button > a:hover{
+   color: #e3e3e3;
+   text-decoration: none;
+ }
+</style>
     <div class="post">
         {% if post.published_date %}
             <div class="date">
                 {{ post.published_date }}
             </div>
         {% endif %}
+        {% if user.is_authenticated %}
         <button type="button" class="btn btn-primary"><a href="{% url 'post_edit' pk=post.pk %}">EDIT</a></button>
+        {% endif %}
         <h2>{{ post.title }}</h2>
         <p>{{ post.text|linebreaksbr }}</p>
     </div>
